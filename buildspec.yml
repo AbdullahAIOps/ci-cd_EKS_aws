@@ -12,17 +12,17 @@ phases:
       - install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
       - kubectl version --client
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 970547352475.dkr.ecr.us-east-2.amazonaws.com
   pre_build:
     commands:
       - echo Building Docker image...
-      - docker build -t my-app .
+      - docker build -t level_5/lab .
   build:
     commands:
       - echo Tagging image...
-      - docker tag my-app:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/my-app:latest
+      - docker tag level_5/lab:latest 970547352475.dkr.ecr.us-east-2.amazonaws.com/level_5/lab:latest
       - echo Pushing image to Amazon ECR...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/my-app:latest
+      - docker push 970547352475.dkr.ecr.us-east-2.amazonaws.com/level_5/lab:latest
   post_build:
     commands:
       - echo Deploying application to Kubernetes...
