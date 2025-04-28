@@ -24,6 +24,7 @@ phases:
   post_build:
     commands:
       - echo Deploying application to Kubernetes...
+      - aws eks update-kubeconfig --region us-east-2 --name my-cluster
       - kubectl get nodes
       - kubectl apply -f deployment.yaml
       - kubectl get deploy
