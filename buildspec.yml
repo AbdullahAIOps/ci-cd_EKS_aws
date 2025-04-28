@@ -14,6 +14,8 @@ phases:
   pre_build:
     commands:
       - echo Building Docker image...
+      - ls -la
+      - pwd
       - docker build -t level_5/lab .
   build:
     commands:
