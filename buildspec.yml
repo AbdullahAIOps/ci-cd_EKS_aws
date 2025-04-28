@@ -29,10 +29,6 @@ phases:
   post_build:
     commands:
       - echo Deploying application to Kubernetes...
-      - export AWS_STS_REGIONAL_ENDPOINTS=regional
-      - aws eks update-kubeconfig --region us-east-2 --name my-cluster
-      - sed -i 's/exec-credential//g' ~/.kube/config
-      - sed -i 's/aws-iam-authenticator/aws/g' ~/.kube/config
       - kubectl get nodes
       - kubectl apply -f deployment.yaml
       - kubectl get deploy
